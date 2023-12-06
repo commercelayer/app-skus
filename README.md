@@ -1,2 +1,1 @@
-# app-skus
-Commerce Layer application for managing SKUs.
+./packages/app/README.md

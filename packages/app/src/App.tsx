@@ -1,5 +1,6 @@
 import { ErrorNotFound } from '#pages/ErrorNotFound'
 import { Filters } from '#pages/Filters'
+import { SkuDetails } from '#pages/SkuDetails'
 import { SkusList } from '#pages/SkusList'
 import {
   CoreSdkProvider,
@@ -8,7 +9,7 @@ import {
   TokenProvider
 } from '@commercelayer/app-elements'
 import { SWRConfig } from 'swr'
-import { Route, Router, Switch } from 'wouter'
+import { Redirect, Route, Router, Switch } from 'wouter'
 import { appRoutes } from './data/routes'
 
 const isDev = Boolean(import.meta.env.DEV)
@@ -38,11 +39,17 @@ export function App(): JSX.Element {
           <CoreSdkProvider>
             <Router base={basePath}>
               <Switch>
+                <Route path={appRoutes.home.path}>
+                  <Redirect to={appRoutes.list.path} />
+                </Route>
                 <Route path={appRoutes.list.path}>
                   <SkusList />
                 </Route>
                 <Route path={appRoutes.filters.path}>
                   <Filters />
+                </Route>
+                <Route path={appRoutes.details.path}>
+                  <SkuDetails />
                 </Route>
                 <Route>
                   <ErrorNotFound />

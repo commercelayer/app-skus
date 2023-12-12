@@ -40,9 +40,13 @@ export const SkusList: FC = () => {
       title='SKUs'
       mode={mode}
       gap='only-top'
-      onGoBack={() => {
-        window.location.href =
-          dashboardUrl != null ? `${dashboardUrl}/hub` : '/'
+      navigationButton={{
+        onClick: () => {
+          window.location.href =
+            dashboardUrl != null ? `${dashboardUrl}/hub` : '/'
+        },
+        label: 'Hub',
+        icon: 'arrowLeft'
       }}
     >
       <SearchWithNav

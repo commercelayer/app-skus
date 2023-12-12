@@ -10,7 +10,6 @@ import {
 } from '@commercelayer/app-elements'
 import { Link, useLocation, useRoute } from 'wouter'
 
-import { ScrollToTop } from '#components/ScrollToTop'
 import { SkuDescription } from '#components/SkuDescription'
 import { SkuInfo } from '#components/SkuInfo'
 import { appRoutes } from '#data/routes'
@@ -33,8 +32,12 @@ export const SkuDetails: FC = () => {
     return (
       <PageLayout
         title='Skus'
-        onGoBack={() => {
-          setLocation(appRoutes.list.makePath())
+        navigationButton={{
+          onClick: () => {
+            setLocation(appRoutes.list.makePath())
+          },
+          label: 'SKUs',
+          icon: 'arrowLeft'
         }}
         mode={mode}
       >
@@ -61,15 +64,19 @@ export const SkuDetails: FC = () => {
       description={
         <SkeletonTemplate isLoading={isLoading}>{sku.code}</SkeletonTemplate>
       }
-      onGoBack={() => {
-        goBack({
-          setLocation,
-          defaultRelativePath: appRoutes.list.makePath()
-        })
+      navigationButton={{
+        onClick: () => {
+          goBack({
+            setLocation,
+            defaultRelativePath: appRoutes.list.makePath()
+          })
+        },
+        label: 'SKUs',
+        icon: 'arrowLeft'
       }}
+      scrollToTop
       gap='only-top'
     >
-      <ScrollToTop />
       <SkeletonTemplate isLoading={isLoading}>
         <Spacer bottom='4'>
           {!isMockedId(sku.id) && (

@@ -16,8 +16,9 @@ import { SkuInfo } from '#components/SkuInfo'
 import { appRoutes } from '#data/routes'
 import { useSkuDetails } from '#hooks/useSkuDetails'
 import { isMockedId } from '#mocks'
+import type { FC } from 'react'
 
-export function SkuDetails(): JSX.Element {
+export const SkuDetails: FC = () => {
   const {
     settings: { mode }
   } = useTokenProvider()

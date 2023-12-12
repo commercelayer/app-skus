@@ -9,10 +9,11 @@ import {
   useResourceFilters,
   useTokenProvider
 } from '@commercelayer/app-elements'
+import type { FC } from 'react'
 import { useLocation } from 'wouter'
 import { navigate, useSearch } from 'wouter/use-location'
 
-export function SkusList(): JSX.Element {
+export const SkusList: FC = () => {
   const {
     canUser,
     dashboardUrl,

@@ -1,9 +1,10 @@
 import { instructions } from '#data/filters'
 import { appRoutes } from '#data/routes'
 import { PageLayout, useResourceFilters } from '@commercelayer/app-elements'
+import type { FC } from 'react'
 import { useLocation } from 'wouter'
 
-export function Filters(): JSX.Element {
+export const Filters: FC = () => {
   const [, setLocation] = useLocation()
   const { FiltersForm, adapters } = useResourceFilters({
     instructions

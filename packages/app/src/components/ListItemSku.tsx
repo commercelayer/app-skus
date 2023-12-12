@@ -7,6 +7,7 @@ import {
   navigateTo
 } from '@commercelayer/app-elements'
 import type { Sku } from '@commercelayer/sdk'
+import type { FC } from 'react'
 import { useLocation } from 'wouter'
 
 interface Props {
@@ -15,7 +16,7 @@ interface Props {
   delayMs?: number
 }
 
-export function ListItemSku({ resource = makeSku() }: Props): JSX.Element {
+export const ListItemSku: FC<Props> = ({ resource = makeSku() }) => {
   const [, setLocation] = useLocation()
 
   return (

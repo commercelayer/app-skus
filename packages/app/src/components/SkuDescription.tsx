@@ -1,13 +1,14 @@
 import { makeSku } from '#mocks'
 import { Spacer, Text } from '@commercelayer/app-elements'
 import type { Sku } from '@commercelayer/sdk'
+import type { FC } from 'react'
 import { SkuImage } from './SkuImage'
 
 interface Props {
   sku: Sku
 }
 
-export function SkuDescription({ sku = makeSku() }: Props): JSX.Element {
+export const SkuDescription: FC<Props> = ({ sku = makeSku() }) => {
   return (
     <div className='border-t border-b'>
       <Spacer top='4' bottom='4'>

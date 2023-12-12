@@ -1,12 +1,13 @@
 import { makeSku } from '#mocks'
 import { ListDetailsItem, Section, Text } from '@commercelayer/app-elements'
 import type { Sku } from '@commercelayer/sdk'
+import type { FC } from 'react'
 
 interface Props {
   sku: Sku
 }
 
-export function SkuInfo({ sku = makeSku() }: Props): JSX.Element {
+export const SkuInfo: FC<Props> = ({ sku = makeSku() }) => {
   return (
     <Section title='Info'>
       <ListDetailsItem label='Shipping category' childrenAlign='right'>

@@ -4,9 +4,10 @@ import {
   EmptyState,
   useTokenProvider
 } from '@commercelayer/app-elements'
+import type { FC } from 'react'
 import { Link } from 'wouter'
 
-export function ListEmptyState(): JSX.Element {
+export const ListEmptyState: FC = () => {
   const { canUser } = useTokenProvider()
 
   if (canUser('create', 'skus')) {

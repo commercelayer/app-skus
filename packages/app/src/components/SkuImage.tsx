@@ -1,11 +1,12 @@
 import { makeSku } from '#mocks'
 import type { Sku } from '@commercelayer/sdk'
+import type { FC } from 'react'
 
 interface Props {
   sku: Sku
 }
 
-export function SkuImage({ sku = makeSku() }: Props): JSX.Element {
+export const SkuImage: FC<Props> = ({ sku = makeSku() }) => {
   if (sku.image_url == null) return <></>
   return (
     <img

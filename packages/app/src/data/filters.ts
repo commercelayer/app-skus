@@ -23,27 +23,6 @@ export const instructions: FiltersInstructions = [
     }
   },
   {
-    label: 'Options',
-    type: 'options',
-    sdk: {
-      predicate: 'sku_options_id_in'
-    },
-    render: {
-      component: 'inputResourceGroup',
-      props: {
-        fieldForLabel: 'name',
-        fieldForValue: 'id',
-        resource: 'sku_options',
-        searchBy: 'name_cont',
-        sortBy: { attribute: 'name', direction: 'asc' },
-        previewLimit: 5,
-        filters: {
-          disabled_at_null: true
-        }
-      }
-    }
-  },
-  {
     label: 'Tags',
     type: 'options',
     sdk: {

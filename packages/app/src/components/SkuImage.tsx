@@ -7,7 +7,6 @@ interface Props {
 }
 
 export const SkuImage: FC<Props> = ({ sku = makeSku() }) => {
-  if (sku.image_url == null) return <></>
   return (
     <img
       width={96}

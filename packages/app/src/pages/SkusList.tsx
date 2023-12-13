@@ -9,10 +9,11 @@ import {
   useResourceFilters,
   useTokenProvider
 } from '@commercelayer/app-elements'
+import type { FC } from 'react'
 import { useLocation } from 'wouter'
 import { navigate, useSearch } from 'wouter/use-location'
 
-export function SkusList(): JSX.Element {
+export const SkusList: FC = () => {
   const {
     canUser,
     dashboardUrl,
@@ -39,9 +40,13 @@ export function SkusList(): JSX.Element {
       title='SKUs'
       mode={mode}
       gap='only-top'
-      onGoBack={() => {
-        window.location.href =
-          dashboardUrl != null ? `${dashboardUrl}/hub` : '/'
+      navigationButton={{
+        onClick: () => {
+          window.location.href =
+            dashboardUrl != null ? `${dashboardUrl}/hub` : '/'
+        },
+        label: 'Hub',
+        icon: 'arrowLeft'
       }}
     >
       <SearchWithNav

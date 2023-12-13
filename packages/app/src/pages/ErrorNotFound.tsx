@@ -1,8 +1,9 @@
 import { appRoutes } from '#data/routes'
 import { Button, EmptyState, PageLayout } from '@commercelayer/app-elements'
+import type { FC } from 'react'
 import { Link } from 'wouter'
 
-export function ErrorNotFound(): JSX.Element {
+export const ErrorNotFound: FC = () => {
   return (
     <PageLayout title='SKUs'>
       <EmptyState

@@ -7,6 +7,21 @@ interface Props {
   sku: Sku
 }
 
+type UnitOfWeight = 'gr' | 'lb' | 'oz' | null | undefined
+
+function getUnitOfWeightLabel(unitOfWeight: UnitOfWeight): string | undefined {
+  if (unitOfWeight != null) {
+    switch (unitOfWeight) {
+      case 'gr':
+        return 'grams'
+      case 'lb':
+        return 'pounds'
+      case 'oz':
+        return 'ounces'
+    }
+  }
+}
+
 export const SkuInfo: FC<Props> = ({ sku = makeSku() }) => {
   return (
     <Section title='Info'>
@@ -15,34 +30,34 @@ export const SkuInfo: FC<Props> = ({ sku = makeSku() }) => {
           {sku.shipping_category?.name}
         </Text>
       </ListDetailsItem>
-      <ListDetailsItem label='Weight' childrenAlign='right'>
-        {sku.weight != null && sku.weight > 0 ? (
-          <Text tag='div' weight='semibold' className='capitalize'>
-            {sku.weight} {sku.unit_of_weight}
+      {sku.weight != null && sku.weight > 0 ? (
+        <ListDetailsItem label='Weight' childrenAlign='right'>
+          <Text tag='div' weight='semibold'>
+            {sku.weight} {getUnitOfWeightLabel(sku.unit_of_weight)}
           </Text>
-        ) : null}
-      </ListDetailsItem>
-      <ListDetailsItem label='Shipping' childrenAlign='right'>
-        {sku.do_not_ship != null && sku.do_not_ship ? (
+        </ListDetailsItem>
+      ) : null}
+      {sku.do_not_ship != null && sku.do_not_ship ? (
+        <ListDetailsItem label='Shipping' childrenAlign='right'>
           <Text tag='div' weight='semibold' className='capitalize'>
             {sku.do_not_ship ? 'Do not ship' : ''}
           </Text>
-        ) : null}
-      </ListDetailsItem>
-      <ListDetailsItem label='Tracking' childrenAlign='right'>
-        {sku.do_not_track != null && sku.do_not_track ? (
+        </ListDetailsItem>
+      ) : null}
+      {sku.do_not_track != null && sku.do_not_track ? (
+        <ListDetailsItem label='Tracking' childrenAlign='right'>
           <Text tag='div' weight='semibold' className='capitalize'>
             {sku.do_not_track ? 'Do not track' : ''}
           </Text>
-        ) : null}
-      </ListDetailsItem>
-      <ListDetailsItem label='Pieces per pack' childrenAlign='right'>
-        {sku.pieces_per_pack != null && sku.pieces_per_pack > 0 ? (
-          <Text tag='div' weight='semibold' className='capitalize'>
+        </ListDetailsItem>
+      ) : null}
+      {sku.pieces_per_pack != null && sku.pieces_per_pack > 0 ? (
+        <ListDetailsItem label='Pieces per pack' childrenAlign='right'>
+          <Text tag='div' weight='semibold'>
             {sku.pieces_per_pack} {sku.pieces_per_pack > 1 ? 'pieces' : 'piece'}
           </Text>
-        ) : null}
-      </ListDetailsItem>
+        </ListDetailsItem>
+      ) : null}
     </Section>
   )
 }

@@ -62,6 +62,9 @@ export function SkuNew(): JSX.Element {
     >
       <Spacer bottom='14'>
         <SkuForm
+          defaultValues={{
+            unitOfWeight: 'gr'
+          }}
           apiError={apiError}
           isSubmitting={isSaving}
           onSubmit={(formValues) => {
@@ -85,7 +88,11 @@ export function SkuNew(): JSX.Element {
 }
 
 function adaptFormValuesToSku(formValues: SkuFormValues): SkuCreate {
+  /*
+   * Note: `unit of weight` field will be sent as `undefined` if the `weight` field is not a positive number
+   */
   const refinedUnitOfWeight =
+    parseInt(formValues.weight ?? '') > 0 &&
     formValues.unitOfWeight != null &&
     formValues.unitOfWeight?.length > 0 &&
     (formValues.unitOfWeight === 'gr' ||

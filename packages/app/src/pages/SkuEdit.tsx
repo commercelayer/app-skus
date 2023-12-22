@@ -116,7 +116,11 @@ function adaptFormValuesToSku(
   formValues: SkuFormValues,
   skuId: string
 ): SkuUpdate {
+  /*
+   * Note: `unit of weight` field will be sent as `undefined` if the `weight` field is not a positive number
+   */
   const refinedUnitOfWeight =
+    parseInt(formValues.weight ?? '') > 0 &&
     formValues.unitOfWeight != null &&
     formValues.unitOfWeight?.length > 0 &&
     (formValues.unitOfWeight === 'gr' ||

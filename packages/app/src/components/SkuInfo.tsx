@@ -26,7 +26,7 @@ export const SkuInfo: FC<Props> = ({ sku = makeSku() }) => {
   return (
     <Section title='Info'>
       <ListDetailsItem label='Shipping category' childrenAlign='right'>
-        <Text tag='div' weight='semibold' className='capitalize'>
+        <Text tag='div' weight='semibold'>
           {sku.shipping_category?.name}
         </Text>
       </ListDetailsItem>
@@ -39,14 +39,14 @@ export const SkuInfo: FC<Props> = ({ sku = makeSku() }) => {
       ) : null}
       {sku.do_not_ship != null && sku.do_not_ship ? (
         <ListDetailsItem label='Shipping' childrenAlign='right'>
-          <Text tag='div' weight='semibold' className='capitalize'>
+          <Text tag='div' weight='semibold'>
             {sku.do_not_ship ? 'Do not ship' : ''}
           </Text>
         </ListDetailsItem>
       ) : null}
       {sku.do_not_track != null && sku.do_not_track ? (
         <ListDetailsItem label='Tracking' childrenAlign='right'>
-          <Text tag='div' weight='semibold' className='capitalize'>
+          <Text tag='div' weight='semibold'>
             {sku.do_not_track ? 'Do not track' : ''}
           </Text>
         </ListDetailsItem>

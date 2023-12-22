@@ -69,7 +69,7 @@ export const SkusList: FC = () => {
           query={{
             pageSize: 25,
             sort: {
-              updated_at: 'desc'
+              code: 'asc'
             }
           }}
           emptyState={<ListEmptyState />}

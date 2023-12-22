@@ -1,25 +1,15 @@
 import { makeSku } from '#mocks'
-import { ListDetailsItem, Section, Text } from '@commercelayer/app-elements'
+import {
+  ListDetailsItem,
+  Section,
+  Text,
+  getUnitOfWeightName
+} from '@commercelayer/app-elements'
 import type { Sku } from '@commercelayer/sdk'
 import type { FC } from 'react'
 
 interface Props {
   sku: Sku
-}
-
-type UnitOfWeight = 'gr' | 'lb' | 'oz' | null | undefined
-
-function getUnitOfWeightLabel(unitOfWeight: UnitOfWeight): string | undefined {
-  if (unitOfWeight != null) {
-    switch (unitOfWeight) {
-      case 'gr':
-        return 'grams'
-      case 'lb':
-        return 'pounds'
-      case 'oz':
-        return 'ounces'
-    }
-  }
 }
 
 export const SkuInfo: FC<Props> = ({ sku = makeSku() }) => {
@@ -33,7 +23,10 @@ export const SkuInfo: FC<Props> = ({ sku = makeSku() }) => {
       {sku.weight != null && sku.weight > 0 ? (
         <ListDetailsItem label='Weight' childrenAlign='right'>
           <Text tag='div' weight='semibold'>
-            {sku.weight} {getUnitOfWeightLabel(sku.unit_of_weight)}
+            {sku.weight}{' '}
+            {sku.unit_of_weight != null
+              ? getUnitOfWeightName(sku.unit_of_weight)
+              : ''}
           </Text>
         </ListDetailsItem>
       ) : null}

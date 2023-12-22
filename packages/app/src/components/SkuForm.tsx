@@ -10,7 +10,9 @@ import {
   Section,
   Spacer,
   Text,
-  useCoreSdkProvider
+  getUnitsOfWeightForSelect,
+  useCoreSdkProvider,
+  type UnitOfWeight
 } from '@commercelayer/app-elements'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, type UseFormSetError } from 'react-hook-form'
@@ -20,6 +22,16 @@ import { useShippingCategoriesList } from '#hooks/useShippingCategoriesList'
 import { fetchShippingCategories } from '#utils/fetchShippingCategories'
 
 import type { ShippingCategory } from '@commercelayer/sdk'
+
+const unitsOfWeightForSelect = getUnitsOfWeightForSelect()
+
+export function isValidUnitOfWeight(value: string): value is UnitOfWeight {
+  return (
+    unitsOfWeightForSelect.filter(
+      (unitOfWeight) => unitOfWeight.value === value
+    ).length === 1
+  )
+}
 
 const skuFormSchema = z.object({
   code: z.string().min(1),
@@ -32,11 +44,7 @@ const skuFormSchema = z.object({
   doNotShip: z.boolean().optional(),
   doNotTrack: z.boolean().optional(),
   weight: z.string().length(0).or(z.undefined()).or(z.string().min(1)),
-  unitOfWeight: z
-    .string()
-    .length(0)
-    .or(z.undefined())
-    .or(z.enum(['gr', 'lb', 'oz']))
+  unitOfWeight: z.string()
 })
 
 export type SkuFormValues = z.infer<typeof skuFormSchema>
@@ -63,11 +71,6 @@ export function SkuForm({
   })
 
   const { shippingCategories } = useShippingCategoriesList({})
-  const unitsOfWeight = [
-    { label: 'grams', value: 'gr' },
-    { label: 'pounds', value: 'lb' },
-    { label: 'ounces', value: 'oz' }
-  ]
 
   /*
    * `isLoadingShippingCategories` is needed/wanted here because `isLoading` prop available from `useCoreApi` does not reflect with precision the fact that data is filled or not.
@@ -142,7 +145,7 @@ export function SkuForm({
             <HookedInput name='weight' label='Weight' />
             <HookedInputSelect
               name='unitOfWeight'
-              initialValues={unitsOfWeight.map(({ value, label }) => ({
+              initialValues={unitsOfWeightForSelect.map(({ value, label }) => ({
                 value,
                 label
               }))}

@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { SkuForm, type SkuFormValues } from '#components/SkuForm'
+import {
+  SkuForm,
+  isValidUnitOfWeight,
+  type SkuFormValues
+} from '#components/SkuForm'
 import { appRoutes } from '#data/routes'
 import { useSkuDetails } from '#hooks/useSkuDetails'
 import {
@@ -123,9 +127,7 @@ function adaptFormValuesToSku(
     parseInt(formValues.weight ?? '') > 0 &&
     formValues.unitOfWeight != null &&
     formValues.unitOfWeight?.length > 0 &&
-    (formValues.unitOfWeight === 'gr' ||
-      formValues.unitOfWeight === 'oz' ||
-      formValues.unitOfWeight === 'lb')
+    isValidUnitOfWeight(formValues.unitOfWeight)
       ? formValues.unitOfWeight
       : undefined
 

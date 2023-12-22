@@ -10,7 +10,7 @@ import {
   useTokenProvider
 } from '@commercelayer/app-elements'
 import type { FC } from 'react'
-import { useLocation } from 'wouter'
+import { Link, useLocation } from 'wouter'
 import { navigate, useSearch } from 'wouter/use-location'
 
 export const SkusList: FC = () => {
@@ -69,10 +69,15 @@ export const SkusList: FC = () => {
           query={{
             pageSize: 25,
             sort: {
-              updated_at: 'desc'
+              code: 'asc'
             }
           }}
           emptyState={<ListEmptyState />}
+          actionButton={
+            canUser('create', 'skus') ? (
+              <Link href={appRoutes.new.makePath()}>Add new</Link>
+            ) : undefined
+          }
         />
       </Spacer>
     </PageLayout>

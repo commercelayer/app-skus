@@ -11,12 +11,10 @@ interface Props {
 export const SkuDescription: FC<Props> = ({ sku = makeSku() }) => {
   return (
     <div className='border-t border-b'>
-      <Spacer top='4' bottom='4'>
+      <Spacer top='6' bottom='6'>
         <div className='flex items-center gap-6'>
           <SkuImage sku={sku} />
-          <Text variant='info' size='small'>
-            {sku.description}
-          </Text>
+          <Text variant='info'>{sku.description}</Text>
         </div>
       </Spacer>
     </div>

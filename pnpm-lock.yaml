@@ -24,11 +24,11 @@ importers:
   packages/app:
     dependencies:
       '@commercelayer/app-elements':
-        specifier: ^1.9.1
-        version: 1.9.1(@commercelayer/sdk@5.23.2)(query-string@8.1.0)(react-dom@18.2.0)(react-gtm-module@2.0.11)(react-hook-form@7.48.2)(react@18.2.0)(wouter@2.12.1)
+        specifier: 1.9.6
+        version: 1.9.6(@commercelayer/sdk@5.21.1)(query-string@8.1.0)(react-dom@18.2.0)(react-gtm-module@2.0.11)(react-hook-form@7.48.2)(react@18.2.0)(wouter@2.12.1)
       '@commercelayer/sdk':
-        specifier: 5.23.2
-        version: 5.23.2
+        specifier: 5.21.1
+        version: 5.21.1
       '@hookform/resolvers':
         specifier: ^3.3.2
         version: 3.3.2(react-hook-form@7.48.2)
@@ -357,8 +357,8 @@ packages:
     dev: true
     optional: true
 
-  /@commercelayer/app-elements@1.9.1(@commercelayer/sdk@5.23.2)(query-string@8.1.0)(react-dom@18.2.0)(react-gtm-module@2.0.11)(react-hook-form@7.48.2)(react@18.2.0)(wouter@2.12.1):
-    resolution: {integrity: sha512-h/4RSLCdXyRG7asQLT/HIxO++MKsUGdSSBMMQPmu6aFdlbFBviNcAYxPobKsR6oVTHTsGqA07ZdOOKoAX5a44A==}
+  /@commercelayer/app-elements@1.9.6(@commercelayer/sdk@5.21.1)(query-string@8.1.0)(react-dom@18.2.0)(react-gtm-module@2.0.11)(react-hook-form@7.48.2)(react@18.2.0)(wouter@2.12.1):
+    resolution: {integrity: sha512-D1cDcQPJ9XpwB0oCV+Fs3kbIB84S/02GeJu2DqqeyOfpjQiwv8G8Igno5SFDLwIxH8zcz1gBfRsRg2g8878PHQ==}
     engines: {node: '>=18', pnpm: '>=7'}
     peerDependencies:
       '@commercelayer/sdk': ^5.x
@@ -369,7 +369,7 @@ packages:
       react-hook-form: ^7.43.x
       wouter: ^2.x
     dependencies:
-      '@commercelayer/sdk': 5.23.2
+      '@commercelayer/sdk': 5.21.1
       '@types/lodash': 4.14.202
       '@types/react': 18.2.42
       '@types/react-datepicker': 4.19.3(react-dom@18.2.0)(react@18.2.0)
@@ -438,8 +438,8 @@ packages:
       - supports-color
     dev: true
 
-  /@commercelayer/sdk@5.23.2:
-    resolution: {integrity: sha512-ldilNT+PEMJfkibq5uGpGQ/5/FPCb/xapZkD2p1PfYaxvST97rtmZCPEI6BuOhtcmpLv7jtD/6tWIRlGqWGE+A==}
+  /@commercelayer/sdk@5.21.1:
+    resolution: {integrity: sha512-ePnXjVMRSdmdJhSZF2GI6joHi3Zm/QEC8gkrwJ0oh4tEhKqL8DOdX8dlhGblDEBJfls8ix1LHr8W+Oh+hkWvFw==}
     engines: {node: '>=16 || ^14.17'}
     dependencies:
       axios: 1.6.1

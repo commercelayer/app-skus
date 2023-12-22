@@ -1,5 +1,7 @@
 import {
   Button,
+  Dropdown,
+  DropdownItem,
   EmptyState,
   PageLayout,
   ResourceTags,
@@ -19,8 +21,10 @@ import type { FC } from 'react'
 
 export const SkuDetails: FC = () => {
   const {
-    settings: { mode }
+    settings: { mode },
+    canUser
   } = useTokenProvider()
+
   const [, setLocation] = useLocation()
   const [, params] = useRoute<{ skuId: string }>(appRoutes.details.path)
 
@@ -55,6 +59,17 @@ export const SkuDetails: FC = () => {
 
   const pageTitle = sku.name
 
+  const contextMenuEdit = canUser('update', 'skus') && (
+    <DropdownItem
+      label='Edit'
+      onClick={() => {
+        setLocation(appRoutes.edit.makePath(skuId))
+      }}
+    />
+  )
+
+  const contextMenu = <Dropdown dropdownItems={<>{contextMenuEdit}</>} />
+
   return (
     <PageLayout
       mode={mode}
@@ -74,6 +89,7 @@ export const SkuDetails: FC = () => {
         label: 'SKUs',
         icon: 'arrowLeft'
       }}
+      actionButton={contextMenu}
       scrollToTop
       gap='only-top'
     >

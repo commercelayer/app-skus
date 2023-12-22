@@ -1,5 +1,10 @@
 import { makeSku } from '#mocks'
-import { ListDetailsItem, Section, Text } from '@commercelayer/app-elements'
+import {
+  ListDetailsItem,
+  Section,
+  Text,
+  getUnitOfWeightName
+} from '@commercelayer/app-elements'
 import type { Sku } from '@commercelayer/sdk'
 import type { FC } from 'react'
 
@@ -11,38 +16,41 @@ export const SkuInfo: FC<Props> = ({ sku = makeSku() }) => {
   return (
     <Section title='Info'>
       <ListDetailsItem label='Shipping category' childrenAlign='right'>
-        <Text tag='div' weight='semibold' className='capitalize'>
+        <Text tag='div' weight='semibold'>
           {sku.shipping_category?.name}
         </Text>
       </ListDetailsItem>
-      <ListDetailsItem label='Weight' childrenAlign='right'>
-        {sku.weight != null && sku.weight > 0 ? (
-          <Text tag='div' weight='semibold' className='capitalize'>
-            {sku.weight} {sku.unit_of_weight}
+      {sku.weight != null && sku.weight > 0 ? (
+        <ListDetailsItem label='Weight' childrenAlign='right'>
+          <Text tag='div' weight='semibold'>
+            {sku.weight}{' '}
+            {sku.unit_of_weight != null
+              ? getUnitOfWeightName(sku.unit_of_weight)
+              : ''}
           </Text>
-        ) : null}
-      </ListDetailsItem>
-      <ListDetailsItem label='Shipping' childrenAlign='right'>
-        {sku.do_not_ship != null && sku.do_not_ship ? (
-          <Text tag='div' weight='semibold' className='capitalize'>
+        </ListDetailsItem>
+      ) : null}
+      {sku.do_not_ship != null && sku.do_not_ship ? (
+        <ListDetailsItem label='Shipping' childrenAlign='right'>
+          <Text tag='div' weight='semibold'>
             {sku.do_not_ship ? 'Do not ship' : ''}
           </Text>
-        ) : null}
-      </ListDetailsItem>
-      <ListDetailsItem label='Tracking' childrenAlign='right'>
-        {sku.do_not_track != null && sku.do_not_track ? (
-          <Text tag='div' weight='semibold' className='capitalize'>
+        </ListDetailsItem>
+      ) : null}
+      {sku.do_not_track != null && sku.do_not_track ? (
+        <ListDetailsItem label='Tracking' childrenAlign='right'>
+          <Text tag='div' weight='semibold'>
             {sku.do_not_track ? 'Do not track' : ''}
           </Text>
-        ) : null}
-      </ListDetailsItem>
-      <ListDetailsItem label='Pieces per pack' childrenAlign='right'>
-        {sku.pieces_per_pack != null && sku.pieces_per_pack > 0 ? (
-          <Text tag='div' weight='semibold' className='capitalize'>
+        </ListDetailsItem>
+      ) : null}
+      {sku.pieces_per_pack != null && sku.pieces_per_pack > 0 ? (
+        <ListDetailsItem label='Pieces per pack' childrenAlign='right'>
+          <Text tag='div' weight='semibold'>
             {sku.pieces_per_pack} {sku.pieces_per_pack > 1 ? 'pieces' : 'piece'}
           </Text>
-        ) : null}
-      </ListDetailsItem>
+        </ListDetailsItem>
+      ) : null}
     </Section>
   )
 }

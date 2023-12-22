@@ -117,7 +117,7 @@ export function SkuForm({
           />
         </Spacer>
         <Spacer top='6' bottom='12'>
-          <Grid columns='2'>
+          <Grid columns='auto'>
             <HookedInputTextArea
               name='description'
               label='Description'
@@ -138,30 +138,22 @@ export function SkuForm({
           </Spacer>
         )}
         <Spacer top='6' bottom='12'>
-          <Grid columns='2'>
-            <HookedInput
-              name='weight'
-              label='Weight'
-              hint={{
-                text: (
-                  <Text variant='info'>
-                    Used to automatically calculate shipping weight.
-                  </Text>
-                )
-              }}
+          <Grid columns='auto' alignItems='end'>
+            <HookedInput name='weight' label='Weight' />
+            <HookedInputSelect
+              name='unitOfWeight'
+              initialValues={unitsOfWeight.map(({ value, label }) => ({
+                value,
+                label
+              }))}
+              pathToValue='value'
             />
-            <Spacer top='8'>
-              <HookedInputSelect
-                name='unitOfWeight'
-                initialValues={unitsOfWeight.map(({ value, label }) => ({
-                  value,
-                  label
-                }))}
-                pathToValue='value'
-                isClearable
-              />
-            </Spacer>
           </Grid>
+          <Spacer top='2'>
+            <Text variant='info' size='small'>
+              Used to automatically calculate shipping weight.
+            </Text>
+          </Spacer>
         </Spacer>
       </Section>
 

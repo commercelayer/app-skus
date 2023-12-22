@@ -4,10 +4,10 @@ import {
   ListItem,
   StatusIcon,
   Text,
-  navigateTo
+  navigateTo,
+  withSkeletonTemplate
 } from '@commercelayer/app-elements'
 import type { Sku } from '@commercelayer/sdk'
-import type { FC } from 'react'
 import { useLocation } from 'wouter'
 
 interface Props {
@@ -16,38 +16,40 @@ interface Props {
   delayMs?: number
 }
 
-export const ListItemSku: FC<Props> = ({ resource = makeSku() }) => {
-  const [, setLocation] = useLocation()
+export const ListItemSku = withSkeletonTemplate<Props>(
+  ({ resource = makeSku() }): JSX.Element | null => {
+    const [, setLocation] = useLocation()
 
-  return (
-    <ListItem
-      tag='a'
-      icon={
-        <Avatar
-          alt={resource.name}
-          src={resource.image_url as `https://${string}`}
-        />
-      }
-      alignItems='center'
-      {...navigateTo({
-        setLocation,
-        destination: {
-          app: 'customers',
-          resourceId: resource.id
+    return (
+      <ListItem
+        tag='a'
+        icon={
+          <Avatar
+            alt={resource.name}
+            src={resource.image_url as `https://${string}`}
+          />
         }
-      })}
-    >
-      <div>
-        <Text tag='div' weight='semibold'>
-          {resource.code}
-        </Text>
-        <Text tag='div' weight='medium' size='small' variant='info'>
-          {resource.name}
-        </Text>
-      </div>
-      <div>
-        <StatusIcon name='caretRight' />
-      </div>
-    </ListItem>
-  )
-}
+        alignItems='center'
+        {...navigateTo({
+          setLocation,
+          destination: {
+            app: 'customers',
+            resourceId: resource.id
+          }
+        })}
+      >
+        <div>
+          <Text tag='div' weight='semibold'>
+            {resource.code}
+          </Text>
+          <Text tag='div' weight='medium' size='small' variant='info'>
+            {resource.name}
+          </Text>
+        </div>
+        <div>
+          <StatusIcon name='caretRight' />
+        </div>
+      </ListItem>
+    )
+  }
+)

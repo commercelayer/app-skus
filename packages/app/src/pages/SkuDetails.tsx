@@ -1,6 +1,7 @@
 import {
   Button,
   Dropdown,
+  DropdownDivider,
   DropdownItem,
   EmptyState,
   PageLayout,
@@ -8,6 +9,8 @@ import {
   SkeletonTemplate,
   Spacer,
   goBack,
+  useCoreSdkProvider,
+  useOverlay,
   useTokenProvider
 } from '@commercelayer/app-elements'
 import { Link, useLocation, useRoute } from 'wouter'
@@ -17,7 +20,7 @@ import { SkuInfo } from '#components/SkuInfo'
 import { appRoutes } from '#data/routes'
 import { useSkuDetails } from '#hooks/useSkuDetails'
 import { isMockedId } from '#mocks'
-import type { FC } from 'react'
+import { useState, type FC } from 'react'
 
 export const SkuDetails: FC = () => {
   const {
@@ -31,6 +34,12 @@ export const SkuDetails: FC = () => {
   const skuId = params?.skuId ?? ''
 
   const { sku, isLoading, error } = useSkuDetails(skuId)
+
+  const { sdkClient } = useCoreSdkProvider()
+
+  const { Overlay, open, close } = useOverlay()
+
+  const [isDeleteting, setIsDeleting] = useState(false)
 
   if (error != null) {
     return (
@@ -68,7 +77,29 @@ export const SkuDetails: FC = () => {
     />
   )
 
-  const contextMenu = <Dropdown dropdownItems={<>{contextMenuEdit}</>} />
+  const contextMenuDivider = canUser('update', 'skus') &&
+    canUser('destroy', 'skus') && <DropdownDivider />
+
+  const contextMenuDelete = canUser('destroy', 'skus') && (
+    <DropdownItem
+      label='Delete'
+      onClick={() => {
+        open()
+      }}
+    />
+  )
+
+  const contextMenu = (
+    <Dropdown
+      dropdownItems={
+        <>
+          {contextMenuEdit}
+          {contextMenuDivider}
+          {contextMenuDelete}
+        </>
+      }
+    />
+  )
 
   return (
     <PageLayout
@@ -115,6 +146,40 @@ export const SkuDetails: FC = () => {
           </Spacer>
         </Spacer>
       </SkeletonTemplate>
+      {canUser('destroy', 'skus') && (
+        <Overlay>
+          <PageLayout
+            title={`Confirm that you want to cancel the ${sku.code} (${sku.name}) SKU.`}
+            description='This action cannot be undone, proceed with caution.'
+            minHeight={false}
+            navigationButton={{
+              onClick: () => {
+                close()
+              },
+              label: `Cancel`,
+              icon: 'x'
+            }}
+          >
+            <Button
+              variant='danger'
+              size='small'
+              disabled={isDeleteting}
+              onClick={(e) => {
+                setIsDeleting(true)
+                e.stopPropagation()
+                void sdkClient.skus
+                  .delete(sku.id)
+                  .then(() => {
+                    setLocation(appRoutes.list.makePath())
+                  })
+                  .catch(() => {})
+              }}
+            >
+              Delete SKU
+            </Button>
+          </PageLayout>
+        </Overlay>
+      )}
     </PageLayout>
   )
 }

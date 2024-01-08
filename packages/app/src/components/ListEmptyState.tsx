@@ -1,3 +1,4 @@
+import { appRoutes } from '#data/routes'
 import {
   A,
   Button,
@@ -16,7 +17,7 @@ export const ListEmptyState: FC = () => {
         title='No SKUs yet!'
         description='Create your first SKU'
         action={
-          <Link href='#'>
+          <Link href={appRoutes.new.makePath()}>
             <Button variant='primary'>New SKU</Button>
           </Link>
         }

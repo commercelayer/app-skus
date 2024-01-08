@@ -219,9 +219,7 @@ export function SkuForm({
           disabled={isSubmitting || isLoadingShippingCategories}
           className='w-full'
         >
-          {defaultValues?.name != null && defaultValues.name.length === 0
-            ? 'Create'
-            : 'Update'}
+          {defaultValues?.name == null ? 'Create' : 'Update'}
         </Button>
         <HookedValidationApiError apiError={apiError} />
       </Spacer>

@@ -74,7 +74,6 @@ export function SkuNew(): JSX.Element {
           onSubmit={(formValues) => {
             setIsSaving(true)
             const sku = adaptFormValuesToSku(formValues)
-            console.log(sku)
             void sdkClient.skus
               .create(sku)
               .then(() => {

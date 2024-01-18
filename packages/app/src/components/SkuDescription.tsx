@@ -1,8 +1,7 @@
 import { makeSku } from '#mocks'
-import { Spacer, Text } from '@commercelayer/app-elements'
+import { Avatar, Spacer, Text } from '@commercelayer/app-elements'
 import type { Sku } from '@commercelayer/sdk'
 import type { FC } from 'react'
-import { SkuImage } from './SkuImage'
 
 interface Props {
   sku: Sku
@@ -13,7 +12,11 @@ export const SkuDescription: FC<Props> = ({ sku = makeSku() }) => {
     <div className='border-t border-b'>
       <Spacer top='6' bottom='6'>
         <div className='flex items-center gap-6'>
-          <SkuImage sku={sku} />
+          <Avatar
+            alt={sku.name}
+            src={sku.image_url as `https://${string}`}
+            size='large'
+          />
           <Text variant='info'>{sku.description}</Text>
         </div>
       </Spacer>

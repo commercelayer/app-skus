@@ -25,7 +25,7 @@ export const SkuInfo: FC<Props> = ({ sku = makeSku() }) => {
           <Text tag='div' weight='semibold'>
             {sku.weight}{' '}
             {sku.unit_of_weight != null
-              ? getUnitOfWeightName(sku.unit_of_weight)
+              ? getUnitOfWeightName(sku.unit_of_weight).toLowerCase()
               : ''}
           </Text>
         </ListDetailsItem>

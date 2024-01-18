@@ -15,13 +15,13 @@
     "prepare": "touch ./public/config.local.js"
   },
   "dependencies": {
-    "@commercelayer/app-elements": "1.9.6",
+    "@commercelayer/app-elements": "1.11.3",
     "@commercelayer/sdk": "5.21.1",
     "@hookform/resolvers": "^3.3.2",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.48.2",
+    "react-hook-form": "7.47.0",
     "swr": "^2.2.4",
     "type-fest": "^4.8.3",
     "wouter": "^2.12.1",

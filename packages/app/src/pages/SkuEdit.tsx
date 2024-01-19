@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import {
-  SkuForm,
-  isValidUnitOfWeight,
-  type SkuFormValues
-} from '#components/SkuForm'
+import { SkuForm, type SkuFormValues } from '#components/SkuForm'
 import { appRoutes } from '#data/routes'
 import { useSkuDetails } from '#hooks/useSkuDetails'
+import { getSkuFromFormValues } from '#utils/getSkuFromFormValues'
 import {
   Button,
   EmptyState,
@@ -15,7 +12,7 @@ import {
   useCoreSdkProvider,
   useTokenProvider
 } from '@commercelayer/app-elements'
-import { type Sku, type SkuUpdate } from '@commercelayer/sdk'
+import { type Sku } from '@commercelayer/sdk'
 import { useState } from 'react'
 import { Link, useLocation, useRoute } from 'wouter'
 
@@ -84,7 +81,7 @@ export function SkuEdit(): JSX.Element {
             onSubmit={(formValues) => {
               setIsSaving(true)
               void sdkClient.skus
-                .update(adaptFormValuesToSku(formValues, sku.id))
+                .update(getSkuFromFormValues(formValues) as Sku)
                 .then((updatedSku) => {
                   setLocation(goBackUrl)
                   void mutateSku({ ...updatedSku })
@@ -103,6 +100,7 @@ export function SkuEdit(): JSX.Element {
 
 function adaptSkuToFormValues(sku?: Sku): SkuFormValues {
   return {
+    id: sku?.id,
     code: sku?.code ?? '',
     name: sku?.name ?? '',
     description: sku?.description ?? '',
@@ -112,39 +110,7 @@ function adaptSkuToFormValues(sku?: Sku): SkuFormValues {
     piecesPerPack: sku?.pieces_per_pack?.toString() ?? '',
     hsTariffNumber: sku?.hs_tariff_number?.toString() ?? '',
     doNotShip: sku?.do_not_ship ?? false,
-    doNotTrack: sku?.do_not_track ?? false
-  }
-}
-
-function adaptFormValuesToSku(
-  formValues: SkuFormValues,
-  skuId: string
-): SkuUpdate {
-  /*
-   * Note: `unit of weight` field will be sent as `undefined` if the `weight` field is not a positive number
-   */
-  const refinedUnitOfWeight =
-    parseInt(formValues.weight ?? '') > 0 &&
-    formValues.unitOfWeight != null &&
-    formValues.unitOfWeight?.length > 0 &&
-    isValidUnitOfWeight(formValues.unitOfWeight)
-      ? formValues.unitOfWeight
-      : undefined
-
-  return {
-    id: skuId,
-    code: formValues.code,
-    name: formValues.name,
-    description: formValues.description,
-    shipping_category: {
-      id: formValues.shippingCategory ?? null,
-      type: 'shipping_categories'
-    },
-    weight: parseInt(formValues.weight ?? ''),
-    unit_of_weight: refinedUnitOfWeight,
-    pieces_per_pack: parseInt(formValues.piecesPerPack ?? ''),
-    hs_tariff_number: formValues.hsTariffNumber,
-    do_not_ship: formValues.doNotShip,
-    do_not_track: formValues.doNotTrack
+    doNotTrack: sku?.do_not_track ?? false,
+    imageUrl: sku?.image_url ?? ''
   }
 }

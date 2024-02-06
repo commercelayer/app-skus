@@ -11,7 +11,7 @@ import {
 } from '@commercelayer/app-elements'
 import type { FC } from 'react'
 import { Link, useLocation } from 'wouter'
-import { navigate, useSearch } from 'wouter/use-location'
+import { navigate, useSearch } from 'wouter/use-browser-location'
 
 export const SkusList: FC = () => {
   const {

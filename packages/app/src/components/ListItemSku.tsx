@@ -33,7 +33,7 @@ export const ListItemSku = withSkeletonTemplate<Props>(
         {...navigateTo({
           setLocation,
           destination: {
-            app: 'customers',
+            app: 'skus',
             resourceId: resource.id
           }
         })}

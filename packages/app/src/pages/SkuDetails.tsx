@@ -147,7 +147,7 @@ export const SkuDetails: FC = () => {
         </Spacer>
       </SkeletonTemplate>
       {canUser('destroy', 'skus') && (
-        <Overlay>
+        <Overlay backgroundColor='light'>
           <PageLayout
             title={`Confirm that you want to cancel the ${sku.code} (${sku.name}) SKU.`}
             description='This action cannot be undone, proceed with caution.'
@@ -159,7 +159,6 @@ export const SkuDetails: FC = () => {
               label: `Cancel`,
               icon: 'x'
             }}
-            overlay
           >
             <Button
               variant='danger'

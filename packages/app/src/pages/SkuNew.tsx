@@ -1,16 +1,16 @@
 import {
-    SkuForm,
-    isValidUnitOfWeight,
-    type SkuFormValues
+  SkuForm,
+  isValidUnitOfWeight,
+  type SkuFormValues
 } from '#components/SkuForm'
 import { appRoutes } from '#data/routes'
 import {
-    Button,
-    EmptyState,
-    PageLayout,
-    Spacer,
-    useCoreSdkProvider,
-    useTokenProvider
+  Button,
+  EmptyState,
+  PageLayout,
+  Spacer,
+  useCoreSdkProvider,
+  useTokenProvider
 } from '@commercelayer/app-elements'
 import { type SkuCreate } from '@commercelayer/sdk'
 import { useState } from 'react'
@@ -34,10 +34,11 @@ export function SkuNew(): JSX.Element {
           onClick: () => {
             setLocation(goBackUrl)
           },
-          label: 'SKUs',
-          icon: 'arrowLeft'
+          label: 'Cancel',
+          icon: 'x'
         }}
         scrollToTop
+        overlay
       >
         <EmptyState
           title='Permission Denied'
@@ -59,10 +60,11 @@ export function SkuNew(): JSX.Element {
         onClick: () => {
           setLocation(goBackUrl)
         },
-        label: 'SKUs',
-        icon: 'arrowLeft'
+        label: 'Cancel',
+        icon: 'x'
       }}
       scrollToTop
+      overlay
     >
       <Spacer bottom='14'>
         <SkuForm

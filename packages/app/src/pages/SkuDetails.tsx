@@ -159,6 +159,7 @@ export const SkuDetails: FC = () => {
               label: `Cancel`,
               icon: 'x'
             }}
+            overlay
           >
             <Button
               variant='danger'
@@ -174,6 +175,7 @@ export const SkuDetails: FC = () => {
                   })
                   .catch(() => {})
               }}
+              fullWidth
             >
               Delete SKU
             </Button>

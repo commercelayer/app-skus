@@ -38,10 +38,11 @@ export function SkuEdit(): JSX.Element {
           onClick: () => {
             setLocation(goBackUrl)
           },
-          label: sku.name,
-          icon: 'arrowLeft'
+          label: 'Cancel',
+          icon: 'x'
         }}
         scrollToTop
+        overlay
       >
         <EmptyState
           title='Not found'
@@ -65,10 +66,11 @@ export function SkuEdit(): JSX.Element {
         onClick: () => {
           setLocation(goBackUrl)
         },
-        label: sku.name,
-        icon: 'arrowLeft'
+        label: 'Cancel',
+        icon: 'x'
       }}
       scrollToTop
+      overlay
     >
       <Spacer bottom='14'>
         {!isLoading && sku != null ? (

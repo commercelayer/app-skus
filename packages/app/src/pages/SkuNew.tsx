@@ -24,7 +24,7 @@ export function SkuNew(): JSX.Element {
   const [apiError, setApiError] = useState<any>()
   const [isSaving, setIsSaving] = useState(false)
 
-  const goBackUrl = appRoutes.list.makePath()
+  const goBackUrl = appRoutes.list.makePath({})
 
   if (!canUser('create', 'skus')) {
     return (
@@ -34,10 +34,11 @@ export function SkuNew(): JSX.Element {
           onClick: () => {
             setLocation(goBackUrl)
           },
-          label: 'SKUs',
-          icon: 'arrowLeft'
+          label: 'Cancel',
+          icon: 'x'
         }}
         scrollToTop
+        overlay
       >
         <EmptyState
           title='Permission Denied'
@@ -59,10 +60,11 @@ export function SkuNew(): JSX.Element {
         onClick: () => {
           setLocation(goBackUrl)
         },
-        label: 'SKUs',
-        icon: 'arrowLeft'
+        label: 'Cancel',
+        icon: 'x'
       }}
       scrollToTop
+      overlay
     >
       <Spacer bottom='14'>
         <SkuForm

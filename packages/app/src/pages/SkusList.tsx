@@ -11,7 +11,7 @@ import {
 } from '@commercelayer/app-elements'
 import type { FC } from 'react'
 import { Link, useLocation } from 'wouter'
-import { navigate, useSearch } from 'wouter/use-location'
+import { navigate, useSearch } from 'wouter/use-browser-location'
 
 export const SkusList: FC = () => {
   const {
@@ -75,7 +75,7 @@ export const SkusList: FC = () => {
           emptyState={<ListEmptyState />}
           actionButton={
             canUser('create', 'skus') ? (
-              <Link href={appRoutes.new.makePath()}>Add new</Link>
+              <Link href={appRoutes.new.makePath({})}>Add new</Link>
             ) : undefined
           }
         />

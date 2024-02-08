@@ -13,14 +13,10 @@ export default defineConfig(({ mode }) => {
     plugins: [react(), tsconfigPaths()],
     envPrefix: 'PUBLIC_',
     base: basePath,
-    server: {
-      fs: {
-        strict: false
-      }
-    },
     test: {
       globals: true,
-      environment: 'jsdom'
+      environment: 'jsdom',
+      passWithNoTests: true
     }
   }
 })

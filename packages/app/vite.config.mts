@@ -15,7 +15,8 @@ export default defineConfig(({ mode }) => {
     base: basePath,
     test: {
       globals: true,
-      environment: 'jsdom'
+      environment: 'jsdom',
+      passWithNoTests: true
     }
   }
 })

@@ -1,16 +1,16 @@
 import {
-  SkuForm,
-  isValidUnitOfWeight,
-  type SkuFormValues
+    SkuForm,
+    isValidUnitOfWeight,
+    type SkuFormValues
 } from '#components/SkuForm'
 import { appRoutes } from '#data/routes'
 import {
-  Button,
-  EmptyState,
-  PageLayout,
-  Spacer,
-  useCoreSdkProvider,
-  useTokenProvider
+    Button,
+    EmptyState,
+    PageLayout,
+    Spacer,
+    useCoreSdkProvider,
+    useTokenProvider
 } from '@commercelayer/app-elements'
 import { type SkuCreate } from '@commercelayer/sdk'
 import { useState } from 'react'
@@ -24,7 +24,7 @@ export function SkuNew(): JSX.Element {
   const [apiError, setApiError] = useState<any>()
   const [isSaving, setIsSaving] = useState(false)
 
-  const goBackUrl = appRoutes.list.makePath()
+  const goBackUrl = appRoutes.list.path
 
   if (!canUser('create', 'skus')) {
     return (

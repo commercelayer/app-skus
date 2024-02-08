@@ -17,7 +17,7 @@ export const ListEmptyState: FC = () => {
         title='No SKUs yet!'
         description='Create your first SKU'
         action={
-          <Link href={appRoutes.new.makePath()}>
+          <Link href={appRoutes.new.path}>
             <Button variant='primary'>New SKU</Button>
           </Link>
         }

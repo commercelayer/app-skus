@@ -28,9 +28,7 @@ export function SkuEdit(): JSX.Element {
   const [isSaving, setIsSaving] = useState(false)
 
   const goBackUrl =
-    skuId != null
-      ? appRoutes.details.makePath(skuId)
-      : appRoutes.list.makePath()
+    skuId != null ? appRoutes.details.makePath({ skuId }) : appRoutes.list.path
 
   if (!canUser('update', 'skus')) {
     return (

@@ -3,11 +3,11 @@ import { ListItemSku } from '#components/ListItemSku'
 import { instructions } from '#data/filters'
 import { appRoutes } from '#data/routes'
 import {
-  EmptyState,
-  PageLayout,
-  Spacer,
-  useResourceFilters,
-  useTokenProvider
+    EmptyState,
+    PageLayout,
+    Spacer,
+    useResourceFilters,
+    useTokenProvider
 } from '@commercelayer/app-elements'
 import type { FC } from 'react'
 import { Link, useLocation } from 'wouter'
@@ -75,7 +75,7 @@ export const SkusList: FC = () => {
           emptyState={<ListEmptyState />}
           actionButton={
             canUser('create', 'skus') ? (
-              <Link href={appRoutes.new.makePath()}>Add new</Link>
+              <Link href={appRoutes.new.path}>Add new</Link>
             ) : undefined
           }
         />

@@ -47,7 +47,7 @@ export const SkuDetails: FC = () => {
         title='Skus'
         navigationButton={{
           onClick: () => {
-            setLocation(appRoutes.list.path)
+            setLocation(appRoutes.list.makePath({}))
           },
           label: 'SKUs',
           icon: 'arrowLeft'
@@ -57,7 +57,7 @@ export const SkuDetails: FC = () => {
         <EmptyState
           title='Not authorized'
           action={
-            <Link href={appRoutes.list.path}>
+            <Link href={appRoutes.list.makePath({})}>
               <Button variant='primary'>Go back</Button>
             </Link>
           }
@@ -114,7 +114,7 @@ export const SkuDetails: FC = () => {
         onClick: () => {
           goBack({
             setLocation,
-            defaultRelativePath: appRoutes.list.path
+            defaultRelativePath: appRoutes.list.makePath({})
           })
         },
         label: 'SKUs',
@@ -171,7 +171,7 @@ export const SkuDetails: FC = () => {
                 void sdkClient.skus
                   .delete(sku.id)
                   .then(() => {
-                    setLocation(appRoutes.list.path)
+                    setLocation(appRoutes.list.makePath({}))
                   })
                   .catch(() => {})
               }}

@@ -24,7 +24,7 @@ export function SkuNew(): JSX.Element {
   const [apiError, setApiError] = useState<any>()
   const [isSaving, setIsSaving] = useState(false)
 
-  const goBackUrl = appRoutes.list.path
+  const goBackUrl = appRoutes.list.makePath({})
 
   if (!canUser('create', 'skus')) {
     return (

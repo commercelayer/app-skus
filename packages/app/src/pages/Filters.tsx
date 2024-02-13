@@ -29,7 +29,7 @@ export const Filters: FC = () => {
     >
       <FiltersForm
         onSubmit={(filtersQueryString) => {
-          setLocation(appRoutes.list.makePath(filtersQueryString))
+          setLocation(appRoutes.list.makePath({}, filtersQueryString))
         }}
       />
     </PageLayout>

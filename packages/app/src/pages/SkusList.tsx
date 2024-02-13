@@ -57,7 +57,7 @@ export const SkusList: FC = () => {
           })
         }}
         onFilterClick={(queryString) => {
-          setLocation(appRoutes.filters.makePath(queryString))
+          setLocation(appRoutes.filters.makePath({}, queryString))
         }}
         hideFiltersNav={false}
       />

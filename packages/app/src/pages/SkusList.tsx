@@ -4,7 +4,7 @@ import { instructions } from '#data/filters'
 import { appRoutes } from '#data/routes'
 import {
   EmptyState,
-  PageLayout,
+  HomePageLayout,
   Spacer,
   useResourceFilters,
   useTokenProvider
@@ -14,11 +14,7 @@ import { Link, useLocation } from 'wouter'
 import { navigate, useSearch } from 'wouter/use-browser-location'
 
 export const SkusList: FC = () => {
-  const {
-    canUser,
-    dashboardUrl,
-    settings: { mode }
-  } = useTokenProvider()
+  const { canUser } = useTokenProvider()
 
   const queryString = useSearch()
   const [, setLocation] = useLocation()
@@ -29,26 +25,14 @@ export const SkusList: FC = () => {
 
   if (!canUser('read', 'skus')) {
     return (
-      <PageLayout title='SKUs' mode={mode}>
+      <HomePageLayout title='SKUs'>
         <EmptyState title='You are not authorized' />
-      </PageLayout>
+      </HomePageLayout>
     )
   }
 
   return (
-    <PageLayout
-      title='SKUs'
-      mode={mode}
-      gap='only-top'
-      navigationButton={{
-        onClick: () => {
-          window.location.href =
-            dashboardUrl != null ? `${dashboardUrl}/hub` : '/'
-        },
-        label: 'Hub',
-        icon: 'arrowLeft'
-      }}
-    >
+    <HomePageLayout title='SKUs'>
       <SearchWithNav
         queryString={queryString}
         onUpdate={(qs) => {
@@ -80,6 +64,6 @@ export const SkusList: FC = () => {
           }
         />
       </Spacer>
-    </PageLayout>
+    </HomePageLayout>
   )
 }

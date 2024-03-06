@@ -26,6 +26,7 @@ export const Filters: FC = () => {
         label: 'Cancel',
         icon: 'x'
       }}
+      overlay
     >
       <FiltersForm
         onSubmit={(filtersQueryString) => {

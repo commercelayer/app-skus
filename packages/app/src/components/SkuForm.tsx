@@ -251,7 +251,7 @@ export function SkuForm({
           <Spacer top='2' bottom='12'>
             <HookedInputCheckbox name='doNotTrack'>
               <Text weight='semibold' size='small'>
-                Do not track
+                Do not track stock
               </Text>
             </HookedInputCheckbox>
           </Spacer>

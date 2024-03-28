@@ -40,7 +40,7 @@ export const SkuInfo: FC<Props> = ({ sku = makeSku() }) => {
       {sku.do_not_track != null && sku.do_not_track ? (
         <ListDetailsItem label='Tracking' childrenAlign='right'>
           <Text tag='div' weight='semibold'>
-            {sku.do_not_track ? 'Do not track' : ''}
+            {sku.do_not_track ? 'Do not track stock' : ''}
           </Text>
         </ListDetailsItem>
       ) : null}

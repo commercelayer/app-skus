@@ -22,7 +22,6 @@ export const ListItemSku = withSkeletonTemplate<Props>(
 
     return (
       <ListItem
-        tag='a'
         icon={
           <Avatar
             alt={resource.name}

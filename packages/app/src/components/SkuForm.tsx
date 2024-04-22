@@ -41,7 +41,7 @@ const skuFormSchema = z.object({
   name: z.string().min(1),
   description: z.string().optional(),
   imageUrl: z.string().optional(),
-  shippingCategory: z.string().min(1).or(z.undefined()),
+  shippingCategory: z.string().min(1),
   piecesPerPack: z.string().optional(),
   hsTariffNumber: z.string().optional(),
   doNotShip: z.boolean().optional(),
@@ -265,7 +265,9 @@ export function SkuForm({
           >
             {defaultValues?.name == null ? 'Create' : 'Update'}
           </Button>
-          <HookedValidationApiError apiError={apiError} />
+          <Spacer top='2'>
+            <HookedValidationApiError apiError={apiError} />
+          </Spacer>
         </Spacer>
       </HookedForm>
       <ImageOverlay>

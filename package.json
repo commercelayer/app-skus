@@ -36,6 +36,7 @@
     "npm-check-updates": "^16.14.18"
   },
   "resolutions": {
-    "follow-redirects": "^1.15.6"
+    "follow-redirects": "^1.15.6",
+    "tar": "^6.2.1"
   }
 }

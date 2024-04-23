@@ -3,8 +3,10 @@ import { ListItemSku } from '#components/ListItemSku'
 import { instructions } from '#data/filters'
 import { appRoutes } from '#data/routes'
 import {
+  Button,
   EmptyState,
   HomePageLayout,
+  Icon,
   Spacer,
   useResourceFilters,
   useTokenProvider
@@ -59,7 +61,17 @@ export const SkusList: FC = () => {
           emptyState={<ListEmptyState />}
           actionButton={
             canUser('create', 'skus') ? (
-              <Link href={appRoutes.new.makePath({})}>Add new</Link>
+              <Link href={appRoutes.new.makePath({})} asChild>
+                <Button
+                  variant='secondary'
+                  size='mini'
+                  alignItems='center'
+                  aria-label='Add SKU'
+                >
+                  <Icon name='plus' />
+                  SKU
+                </Button>
+              </Link>
             ) : undefined
           }
         />

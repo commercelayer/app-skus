@@ -6,11 +6,13 @@ import {
   EmptyState,
   Icon,
   PageLayout,
+  ResourceMetadata,
   ResourceTags,
   SkeletonTemplate,
   Spacer,
   goBack,
   useCoreSdkProvider,
+  useEditMetadataOverlay,
   useOverlay,
   useTokenProvider
 } from '@commercelayer/app-elements'
@@ -42,6 +44,9 @@ export const SkuDetails: FC = () => {
 
   const [isDeleteting, setIsDeleting] = useState(false)
 
+  const { Overlay: EditMetadataOverlay, show: showEditMetadataOverlay } =
+    useEditMetadataOverlay()
+
   if (error != null) {
     return (
       <PageLayout
@@ -70,12 +75,20 @@ export const SkuDetails: FC = () => {
   const pageTitle = sku.name
 
   const contextMenuEdit = canUser('update', 'skus') && (
-    <DropdownItem
-      label='Edit'
-      onClick={() => {
-        setLocation(appRoutes.edit.makePath({ skuId }))
-      }}
-    />
+    <>
+      <DropdownItem
+        label='Edit'
+        onClick={() => {
+          setLocation(appRoutes.edit.makePath({ skuId }))
+        }}
+      />
+      <DropdownItem
+        label='Set metadata'
+        onClick={() => {
+          showEditMetadataOverlay()
+        }}
+      />
+    </>
   )
 
   const contextMenuDivider = canUser('update', 'skus') &&
@@ -150,6 +163,18 @@ export const SkuDetails: FC = () => {
           <Spacer top='14'>
             <SkuInfo sku={sku} />
           </Spacer>
+          {!isMockedId(sku.id) && (
+            <Spacer top='14'>
+              <ResourceMetadata
+                resourceType='skus'
+                resourceId={sku.id}
+                overlay={{
+                  title: sku.name,
+                  description: sku.code
+                }}
+              />
+            </Spacer>
+          )}
         </Spacer>
       </SkeletonTemplate>
       {canUser('destroy', 'skus') && (
@@ -186,6 +211,14 @@ export const SkuDetails: FC = () => {
             </Button>
           </PageLayout>
         </Overlay>
+      )}
+      {!isMockedId(sku.id) && (
+        <EditMetadataOverlay
+          resourceType={sku.type}
+          resourceId={sku.id}
+          title={sku.name}
+          description={sku.code}
+        />
       )}
     </PageLayout>
   )

@@ -21,7 +21,7 @@ export const SkusList: FC = () => {
   const queryString = useSearch()
   const [, setLocation] = useLocation()
 
-  const { SearchWithNav, FilteredList } = useResourceFilters({
+  const { SearchWithNav, FilteredList, hasActiveFilter } = useResourceFilters({
     instructions
   })
 
@@ -58,7 +58,11 @@ export const SkusList: FC = () => {
               code: 'asc'
             }
           }}
-          emptyState={<ListEmptyState />}
+          emptyState={
+            <ListEmptyState
+              scope={hasActiveFilter ? 'userFiltered' : 'history'}
+            />
+          }
           actionButton={
             canUser('create', 'skus') ? (
               <Link href={appRoutes.new.makePath({})} asChild>
@@ -69,7 +73,7 @@ export const SkusList: FC = () => {
                   aria-label='Add SKU'
                 >
                   <Icon name='plus' />
-                  SKU
+                  New
                 </Button>
               </Link>
             ) : undefined

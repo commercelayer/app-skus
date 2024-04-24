@@ -5,11 +5,27 @@ import {
   EmptyState,
   useTokenProvider
 } from '@commercelayer/app-elements'
-import type { FC } from 'react'
 import { Link } from 'wouter'
 
-export const ListEmptyState: FC = () => {
+interface Props {
+  scope?: 'history' | 'userFiltered'
+}
+
+export function ListEmptyState({ scope = 'history' }: Props): JSX.Element {
   const { canUser } = useTokenProvider()
+
+  if (scope === 'userFiltered') {
+    return (
+      <EmptyState
+        title='No SKUs found!'
+        description={
+          <div>
+            <p>We didn't find any SKU matching the current search.</p>
+          </div>
+        }
+      />
+    )
+  }
 
   if (canUser('create', 'skus')) {
     return (
